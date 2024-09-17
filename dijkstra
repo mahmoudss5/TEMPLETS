@@ -1,5 +1,5 @@
 
-```cpp
+
 
   while (!pq.empty()) {
           auto x = pq.top();
@@ -14,4 +14,4 @@
                   pq.push({cost+b, a});
               }
           }
-      }```
+      }
