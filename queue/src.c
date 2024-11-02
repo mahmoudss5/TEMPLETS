@@ -1,5 +1,5 @@
 //
-// Created by mahmo on 10/29/2024.
+// Created by mahmo on 11/2/2024.
 //
 #include "queue.h"
 #include "stdio.h"
@@ -35,4 +35,14 @@ type pop(queue *q){
 }
 type top(queue *q){
     return q->items[q->erase];
+}
+void traverse(queue *q, void (*pf)(type e)) {
+    if (isempty(q)) {
+        printf("Queue is empty\n");
+        return;
+    }
+    for (int i = 0; i < q->size; ++i) {
+        int index = (q->erase + i) % N;
+        pf(q->items[index]);
+    }
 }
