@@ -11,19 +11,25 @@ int isfull(list *l) {
     return 0;
 }
 
+int size(list *l) {
+    return l->size;
+}
+
 void insert(list *l, type item, int pos) {
-    if (pos > l->size + 1 || pos < 1) {
+    if (pos > l->size || pos < 0) {
         printf("Invalid position\n");
         return;
     }
+
     node *pn = (node *)malloc(sizeof(node));
     pn->info = item;
-    if (pos == 1) { 
+
+    if (pos == 0) {
         pn->next = l->head;
         l->head = pn;
-    } else { 
+    } else {
         node *pt = l->head;
-        for (int i = 1; i < pos - 1; ++i) {
+        for (int i = 0; i < pos - 1; ++i) {
             pt = pt->next;
         }
         pn->next = pt->next;
@@ -32,12 +38,22 @@ void insert(list *l, type item, int pos) {
     l->size++;
 }
 
-type peak(list *l) {
+type peak(list *l, int index) {
     if (l->head == NULL) {
         printf("List is empty!\n");
         return 0;
     }
-    return l->head->info;
+
+    if (index < 0 || index >= l->size) {
+        printf("Invalid index!\n");
+        return 0;
+    }
+
+    node *pt = l->head;
+    for (int i = 0; i < index; ++i) {
+        pt = pt->next;
+    }
+    return pt->info;
 }
 
 int count(list *l, type elemnt) {
@@ -64,7 +80,8 @@ type erase(list *l, int position) {
 
     node *current = l->head;
     type elem;
-    if (position == 0) { 
+
+    if (position == 0) {
         elem = current->info;
         l->head = current->next;
         free(current);
