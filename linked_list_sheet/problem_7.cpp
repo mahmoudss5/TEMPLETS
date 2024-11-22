@@ -26,7 +26,6 @@ typedef struct {
 
 typedef Employee type;
 
-// تعريف العقدة
 typedef struct nodet {
     type info;
     struct nodet *next;
