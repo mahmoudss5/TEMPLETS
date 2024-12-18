@@ -26,4 +26,9 @@ type findMin(node *root);
 int size(bst *t);
 int height(bst *t);
 int hh(node *);
+void deletelargest(bst *t);
+void deleteleafs(bst *t);
+void delete_leaf(node *root);
+void destroyTreeNodes(node *root);
+void destroyTree(bst *t);
 #endif // UNTITLED6_BST_H
