@@ -130,5 +130,58 @@ int height(bst *t) {
         return hh(t->t);
     }
 }
+void deletelargest(bst *t){
+    node *root = t->t;
+    node *prev = NULL;
+    node *cur = root->right;
+    while (cur->right != NULL) {
+        prev = cur;
+        cur = cur->right;
+    }
+    if (cur->left != NULL) {
+        prev->right = cur->left;
+    } else {
+        prev->right = NULL;
+    }
 
-
+}
+void delete_leaf(node *root){
+   if(root==NULL){
+       return;
+   }
+    if(root->right==NULL && root->left==NULL){
+        free(root);
+        return;
+    }
+    if(root->right!=NULL){
+        delete_leaf(root->right);
+    }
+    if(root->left!=NULL){
+        delete_leaf(root->left);
+    }
+    return;
+}
+void deleteleafs(bst *t){
+    node *root =t->t;
+    if(root!=NULL){
+        delete_leaf(root);
+    }
+    return;
+}
+void destroyTreeNodes(node *root) {
+    if (root == NULL) {
+        return;
+    }
+    destroyTreeNodes(root->left);
+    destroyTreeNodes(root->right);
+    free(root);
+}
+void destroyTree(bst *t) {
+    if (t->t == NULL) {
+        printf("The tree is already empty.\n");
+        return;
+    }
+    destroyTreeNodes(t->t);
+    t->t = NULL;
+    printf("The tree has been destroyed successfully.\n");
+}
